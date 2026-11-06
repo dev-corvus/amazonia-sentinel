@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Carbon Forensics | Mapa interativo</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Segoe UI,Arial,sans-serif;background:#0b1220;color:#e2e8f0}
+header{height:60px;display:flex;align-items:center;padding:0 22px;background:#0f172a;border-bottom:1px solid #334155}
+header b{font-size:21px;letter-spacing:1px}header .nav{margin-left:auto;display:flex;gap:14px;flex-wrap:wrap}.nav a{color:#bfdbfe;text-decoration:none;font-size:13px;padding:7px 9px;border:1px solid #334155;border-radius:6px}.nav a:hover{background:#1e293b}header small{margin-left:16px;color:#94a3b8}
+main{display:grid;grid-template-columns:minmax(0,1fr) 350px;height:calc(100vh - 60px)}#map{height:100%;width:100%;background:#cad4dc}
+aside{overflow:auto;padding:18px;background:#101c2d;border-left:1px solid #334155}
+h3{margin:8px 0 12px;font-size:15px;color:#93c5fd}label{display:block;margin:8px 0}
+select,button{width:100%;padding:10px;border-radius:7px;background:#1e293b;color:white;border:1px solid #475569}
+button{cursor:pointer;background:#2563eb;border:0;margin-top:9px}button:hover{background:#1d4ed8}
+.card{background:#17263b;border:1px solid #293c53;padding:12px;border-radius:10px;margin:12px 0}
+small,.muted{color:#94a3b8}#details{white-space:pre-wrap;overflow-wrap:anywhere;font-size:12px;max-height:260px;overflow:auto}
+#chart{width:100%;height:170px}#status{font-size:12px;color:#fde68a;line-height:1.5}
+.leaflet-container{background:#dbe3e9}@media(max-width:850px){main{display:block;height:auto}#map{height:60vh}aside{height:auto}}
+</style></head><body>
+<header><b>CARBON FORENSICS</b><small>Amazônia Legal · PRODES / IBGE</small><nav class="nav"><a href="/index.html">Início</a><a href="/mapa.html">Mapa interativo</a><a href="/dashboard.html">Dashboard</a></nav></header>
+<main><div id="map"></div><aside>
+<h3>Filtros</h3><label>Ano do desmatamento <select id="year"></select></label>
+<h3>Camadas</h3><label><input type="checkbox" data-layer="limite" checked> Limite IBGE — azul</label>
+<label><input type="checkbox" data-layer="historico" checked> PRODES histórico — vermelho</label>
+<label><input type="checkbox" data-layer="hidrografia"> Hidrografia — azul-claro</label>
+<label><input type="checkbox" data-layer="acumulado"> Acumulado até 2007 — amarelo</label>
+<label><input type="checkbox" data-layer="residual"> Residual preliminar 2026 — roxo</label>
+<button id="reload">Atualizar área visível</button>
+<div class="card"><h3>Histórico anual (base completa)</h3><canvas id="chart"></canvas><div class="muted" style="font-size:11px">Área calculada a partir das geometrias, em hectares; pode diferir de métricas oficiais publicadas.</div></div>
+<div class="card"><h3>Resumo</h3><div id="summary">Carregando...</div></div>
+<div class="card"><h3>Informações do polígono</h3><div id="details">Passe o mouse sobre uma área ou clique para ver todos os atributos.</div></div>
+<div class="card"><h3>Estado do mapa</h3><div id="status">Iniciando...</div></div>
+<div class="muted" style="font-size:11px">O desmatamento mapeado não demonstra, por si só, ilegalidade ou fraude de carbono. O residual 2026 é preliminar.</div>
+</aside></main>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+if(!window.L){document.getElementById('status').textContent='A biblioteca Leaflet não carregou. Verifique internet ou bloqueio de unpkg.com.';throw new Error('Leaflet indisponível');}
+const map=L.map('map',{preferCanvas:false,minZoom:3,maxBounds:[[-22,-84],[12,-34]],maxBoundsViscosity:0.8}).setView([-5.3,-60],5);
+L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',{maxZoom:18,attribution:'Esri World Imagery'}).addTo(map);
+const colors={limite:'#00bfff',historico:'#ef4444',hidrografia:'#38bdf8',acumulado:'#facc15',residual:'#e879f9'};
+const layers={};let controller=null,sequence=0;const svgRenderer=L.svg({padding:0.25});
+for(const key of Object.keys(colors))layers[key]=L.geoJSON(null,{renderer:svgRenderer,interactive:true,style:()=>({color:colors[key],weight:key==='limite'?3:1,fillOpacity:key==='limite'?0:.38,opacity:.9}),
+ onEachFeature:(feature,layer)=>{layer.on('mouseover',()=>{showFeature(feature,false);layer.setStyle({weight:3,fillOpacity:0.65});});layer.on('mouseout',()=>layers[key].resetStyle(layer));layer.on('click',()=>showFeature(feature,true));}}).addTo(map);
+const status=document.getElementById('status');const year=document.getElementById('year');
+function enabled(key){return document.querySelector('[data-layer="'+key+'"]').checked}
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+async function showFeature(feature,full){const p=feature.properties;let lines='ID: '+p.id+'\nAno: '+(p.ano??'não informado')+'\nÁrea: '+(p.area_ha==null?'não calculada':Number(p.area_ha).toLocaleString('pt-BR',{maximumFractionDigits:2})+' ha');
+if(full){try{const r=await fetch('/api/feature?id='+encodeURIComponent(p.id));const d=await r.json();lines+='\n\nAtributos originais:\n'+JSON.stringify(d.attributes,null,2);}catch(e){lines+='\nErro ao carregar atributos: '+e.message;}}
+document.getElementById('details').textContent=lines;}
+async function update(){const seq=++sequence;if(controller)controller.abort();controller=new AbortController();const b=map.getBounds();const bbox=[b.getWest(),b.getSouth(),b.getEast(),b.getNorth()].join(',');let messages=[];
+for(const key of Object.keys(layers)){
+ if(!enabled(key)){layers[key].clearLayers();map.removeLayer(layers[key]);continue;}
+ if(!map.hasLayer(layers[key]))layers[key].addTo(map);
+ try{const params=new URLSearchParams({layer:key,bbox,limit:key==='historico'?'450':'120',detail:String(Math.max(0.00003,1.2/map.getZoom()**3))});if(key==='historico')params.set('year',year.value||'2025');
+ const response=await fetch('/api/map?'+params,{signal:controller.signal});if(!response.ok)throw new Error(await response.text());const result=await response.json();if(seq!==sequence)return;
+ layers[key].clearLayers();layers[key].addData(result);messages.push(key+': '+result.features.length+(result.truncated?' (limite atingido; aproxime o zoom)':''));
+ }catch(e){if(e.name==='AbortError')return;messages.push(key+': erro '+e.message);}
+}
+status.textContent=messages.join('\n')+'\nOs totais históricos são calculados sobre a base inteira.';}
+let pending;map.on('moveend',()=>{clearTimeout(pending);pending=setTimeout(update,550)});
+document.querySelectorAll('[data-layer]').forEach(c=>c.addEventListener('change',update));year.addEventListener('change',update);document.getElementById('reload').addEventListener('click',update);
+async function init(){try{const response=await fetch('/api/stats');if(!response.ok)throw new Error(await response.text());const data=await response.json();for(let y=2025;y>=2020;y--){const o=document.createElement('option');o.value=y;o.textContent=y;year.appendChild(o)}year.value=([2020,2021,2022,2023,2024,2025].includes(Number(new URLSearchParams(location.search).get('year')))?new URLSearchParams(location.search).get('year'):'2025');
+let total=data.years.reduce((a,b)=>a+b.count,0),area=data.years.reduce((a,b)=>a+b.area_ha,0);
+document.getElementById('summary').textContent='Polígonos com ano: '+total.toLocaleString('pt-BR')+'\nÁrea histórica calculada: '+Math.round(area).toLocaleString('pt-BR')+' ha\nRegistros sem ano: '+data.without_year.toLocaleString('pt-BR')+'\nCamadas: '+data.layers.map(x=>x.layer+' ('+x.count.toLocaleString('pt-BR')+')').join(', ');
+document.getElementById('summary').style.whiteSpace='pre-wrap';drawChart(data.years);update();}catch(e){status.textContent='Falha ao consultar o servidor: '+e.message;}}
+function drawChart(years){const canvas=document.getElementById('chart'),ctx=canvas.getContext('2d');const dpr=window.devicePixelRatio||1;canvas.width=canvas.clientWidth*dpr;canvas.height=170*dpr;ctx.scale(dpr,dpr);const w=canvas.clientWidth,h=170;ctx.clearRect(0,0,w,h);if(!years.length)return;const max=Math.max(1,...years.map(x=>x.area_ha)),bar=w/years.length;
+ctx.fillStyle='#38bdf8';years.forEach((r,i)=>{const hh=(h-40)*r.area_ha/max;ctx.fillRect(i*bar+2,h-25-hh,Math.max(2,bar-4),hh)});ctx.fillStyle='#cbd5e1';ctx.font='11px Segoe UI';ctx.fillText(years[0].year,3,h-7);ctx.fillText(years[years.length-1].year,w-40,h-7);}
+init();
+</script></body></html>
