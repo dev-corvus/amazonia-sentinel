@@ -67,6 +67,14 @@ O desafio central do projeto é integrar várias fontes de informação em uma m
 - Comparação entre contexto territorial e ocorrência observada.
 - Estrutura preparada para evoluir para alertas automáticos e priorização de investigação.
 
+## Interface implementada
+
+A interface do MVP foi desenvolvida para apresentar uma visão geoespacial clara do monitoramento da Amazônia, com filtros por ano, camadas de degradação e comparação antes/depois.
+
+<p align="center">
+  <img src="./assets/interface-implementada.png" alt="Interface implementada do Amazônia Sentinel" width="100%" />
+</p>
+
 ## Arquitetura conceitual
 
 O MVP foi pensado como uma plataforma de análise multissensor e multiescala, composta por:
