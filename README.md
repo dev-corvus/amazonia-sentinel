@@ -1,4 +1,4 @@
-![logo](./assets\amazonia-sentinel-logo.png)
+![logo](./assets/amazonia-sentinel-logo.png)
 
 Plataforma MVP chamada Amazônia Sentinel de inteligência geoespacial para monitorar a degradação florestal na Amazônia, detectando alterações por meio de imagens de satélite, dados ambientais oficiais e indicadores de risco.
 
