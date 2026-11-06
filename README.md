@@ -8,6 +8,18 @@ Plataforma MVP chamada Amazônia Sentinel de inteligência geoespacial para moni
   <img alt="Python" src="https://img.shields.io/badge/Python-3.10%2B-3776AB?style=for-the-badge&logo=python&logoColor=white" />
 </p>
 
+<p align="center">
+  <a href="https://www.canva.com/design/DAHaK3vVrvM/vkMvJO9RFtDKRoPlIXUHaQ/edit">
+    <img alt="Pitch - apresentação" src="https://img.shields.io/badge/Canva-Pitch-FF7F50?style=for-the-badge&logo=canva&logoColor=white" />
+  </a>
+  <a href="./docs/Documentacao_Tecnica_Amazonia_Sentinel.pdf">
+    <img alt="Documentação técnica" src="https://img.shields.io/badge/Docs-Técnica-0EA5E9?style=for-the-badge&logo=readthedocs&logoColor=white" />
+  </a>
+  <a href="./docs/relatorio-futuro.pdf">
+    <img alt="Exemplo de relatório" src="https://img.shields.io/badge/Relatório-Exemplo-10B981?style=for-the-badge&logo=file&logoColor=white" />
+  </a>
+</p>
+
 ## Visão geral
 
 O projeto Amazônia Sentinel nasce da necessidade de transformar a observação da floresta em uma análise evidenciada, rastreável e útil para tomada de decisão. Em vez de responder apenas "onde a floresta mudou", o sistema busca responder:
@@ -24,6 +36,7 @@ A solução combina imagens ópticas e de radar, focos térmicos, áreas monitor
 
 | Nome | Perfil |
 |---|---|
+| Alex Furukawa | [<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg" width="22" height="22" alt="LinkedIn" />](https://www.linkedin.com/in/lexkawa) | 
 | Ana Beatriz Santana | [<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg" width="22" height="22" alt="LinkedIn" />](https://www.linkedin.com/in/ana-beatriz-santana-2592a7348) |
 | Fabiane Santiago | [<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg" width="22" height="22" alt="LinkedIn" />](https://www.linkedin.com/in/fabiane-santiago-302b6370) |
 | Júlia D'Angelo | [<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg" width="22" height="22" alt="LinkedIn" />](https://www.linkedin.com/in/júliadangelo?utm_source=share_via&utm_content=profile&utm_medium=member_ios) |
