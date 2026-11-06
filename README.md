@@ -1,111 +1,122 @@
-<p align="center">
-  <a href="https://figma.com">
-    <img src="https://shields.io/badge/figma-link-purple?logo=figma&logoColor=white" alt="Figma" />
-  </a>
-  <a href="https://dev-corvus.github.io/portfolio">
-    <img src="https://img.shields.io/badge/github_pages-deploy-blue?logo=github&logoColor=white" alt="GitHub Pages" />
-  </a>
-</p>
+![logo](./assets\amazonia-sentinel-logo.png)
+
+Plataforma MVP chamada Amazônia Sentinel de inteligência geoespacial para monitorar a degradação florestal na Amazônia, detectando alterações por meio de imagens de satélite, dados ambientais oficiais e indicadores de risco.
 
 <p align="center">
-  <a href="#">
-    <img src="https://shields.io/badge/HTML-%23E34F26.svg?logo=html5&logoColor=white" alt="HTML" />
-  </a>
-  <a href="#">
-    <img src="https://shields.io/badge/CSS-639?logo=css&logoColor=fff" alt="CSS" />
-  </a>
+  <img alt="Amazônia Sentinel" src="https://img.shields.io/badge/Amaz%C3%B4nia-Sentinel-0F766E?style=for-the-badge&logo=earth&logoColor=white" />
+  <img alt="MVP" src="https://img.shields.io/badge/MVP-Geospatial-1D4ED8?style=for-the-badge" />
+  <img alt="Python" src="https://img.shields.io/badge/Python-3.10%2B-3776AB?style=for-the-badge&logo=python&logoColor=white" />
 </p>
 
-# ![project logo](./assets/images/icons/logo.png) Project Name
-A responsive institutional/creative/professional page/application/service from company/portfolio to showcase a this and that, developed as part of the [program](link).
+## Visão geral
+
+O projeto Amazônia Sentinel nasce da necessidade de transformar a observação da floresta em uma análise evidenciada, rastreável e útil para tomada de decisão. Em vez de responder apenas "onde a floresta mudou", o sistema busca responder:
+
+- o que ocorreu;
+- quanto foi afetado;
+- quando isso aconteceu;
+- qual é a evidência de sensoriamento remoto;
+- como a ocorrência se relaciona com autorizações ambientais e contextos legais.
+
+A solução combina imagens ópticas e de radar, focos térmicos, áreas monitoradas e dados geoespaciais para identificar sinais de degradação, como incêndios, corte seletivo, efeito de borda e quedas massivas de árvores. O objetivo do MVP é demonstrar a viabilidade da abordagem em uma interface interativa de mapeamento e painel analítico.
+
+## Equipe - Grupo 14
+
+| Nome | Perfil |
+|---|---|
+| Ana Beatriz Santana | [<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg" width="22" height="22" alt="LinkedIn" />](https://www.linkedin.com/in/ana-beatriz-santana-2592a7348) |
+| Fabiane Santiago | [<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg" width="22" height="22" alt="LinkedIn" />](https://www.linkedin.com/in/fabiane-santiago-302b6370) |
+| Júlia D'Angelo | [<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg" width="22" height="22" alt="LinkedIn" />](https://www.linkedin.com/in/júliadangelo?utm_source=share_via&utm_content=profile&utm_medium=member_ios) |
+| Thiago Stevam | [<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" width="22" height="22" alt="GitHub" style="filter: brightness(0) invert(1);" />](https://github.com/Thx03) |
 
 
-## ![image icon](./assets/images/icons/image-icon.png) Visual Preview
+## Problema e motivação
 
-![Final Output Preview](/images/landing-page.png)
-*Figure 1: Full desktop layout of the Acqua Project landing page.*
+A degradação florestal na Amazônia nem sempre resulta na remoção total da cobertura vegetal. Alterações sutis, como incêndios de baixa intensidade, cortes seletivos, bordas fragmentadas e quedas agrupadas, podem passar despercebidas quando os dados estão fragmentados ou quando não há correlação entre imagens e registros ambientais.
 
-<p align="center">
-  <img src="images/mobile-landing-page.png" width="48%" alt="Mobile responsive preview" />
-  <img src="images/mobile-progress.png" width="48%" alt="Content and form section preview" />
-</p>
-<p align="center">
-  <em>Figure 2: Mobile form (left) and progress page (right).</em>
-</p>
+O desafio central do projeto é integrar várias fontes de informação em uma mesma linha de análise, permitindo uma avaliação mais confiável do que foi observado no território e o que pode estar associado a atividades autorizadas ou não autorizadas.
 
+## Objetivos do MVP
 
-## ![target logo](./assets/images/icons/target-icon.png) Overview & Objectives
+- Detectar alterações relacionadas a vetores prioritários de degradação.
+- Delimitar espacialmente eventos e gerar séries temporais antes/depois.
+- Quantificar extensão, intensidade e frequência de eventos observados.
+- Comparar ocorrências com polígonos e dados de contexto ambiental.
+- Apresentar alertas e indicadores em um dashboard geoespacial.
+- Registrar evidências para revisão humana, sem substituir a validação jurídica ou técnica final.
 
-* **Problem / Motivation:** Raise awareness about sustainable water usage through a clear, accessible, and structured web interface built from scratch.
-* **Scope:** A semantic, multi-section static web page developed as a practical team project for the DevMentors track within the Transforme-se initiative (Serasa Experian in partnership with Instituto PROA).
-* **Core Takeaways:** Mastered pure HTML5 semantic architecture, CSS3 styling techniques (Flexbox and Grid), responsive design patterns across screen sizes, and Git team collaboration workflows prior to introducing JavaScript.
+## Funcionalidades principais
 
----
+- Mapa interativo com camadas geoespaciais e overlays por ano.
+- Visualização de áreas de interesse e histórico temporal.
+- Cálculo de área e suporte para indicadores de degradação.
+- Integração de dados de referência, como PRODES/DETER, MapBiomas e dados ambientais oficiais.
+- Comparação entre contexto territorial e ocorrência observada.
+- Estrutura preparada para evoluir para alertas automáticos e priorização de investigação.
 
-## ![project logo](./assets/images/icons/feature-icon.png)Features
+## Arquitetura conceitual
 
-* **Semantic Web Structure:** Built entirely with native HTML5 semantic tags (`header`, `nav`, `main`, `section`, `article`, `footer`) to ensure accessibility and clear document hierarchy.
-* **Responsive Layout:** Fluid layouts implemented using CSS Flexbox and media queries to adapt cleanly between mobile devices, tablets, and desktop displays.
-* **Styling & Visual Identity:** Cohesive color palette and typography centered around aquatic and environmental themes, utilizing CSS custom properties (variables) for consistent maintenance.
-* **Extra:** Add a favicon and hover effect on the button, fixed img spacing using `display: block`, footer and border-radius to the images `ul`.
----
+O MVP foi pensado como uma plataforma de análise multissensor e multiescala, composta por:
 
-## ![tool logo](./assets/images/icons/wrench-icon.png) 5. Tools & Technologies
+- ingestão de dados geoespaciais e ambientais;
+- processamento e normalização de camadas;
+- análise temporal e espacial de alterações;
+- avaliação de evidências e atributos de risco;
+- painel interativo para inspeção e priorização.
 
-| Category | Tools / Frameworks |
-| :--- | :--- |
-| **Markup & Semantics** | HTML5 |
-| **Styling & Layout** | CSS3 (Flexbox, CSS Variables, Media Queries) |
-| **Design & Assets** | [Figma](https://www.figma.com/design/), [Google Fonts](https://fonts.google.com/specimen/) |
-| **Version Control & Collaboration** | [Git, GitHub](https://github.com/dev-corvus)|
-| **Code Editor** | Visual Studio Code |
-|  **Deployment & Build Tools:** | Vercel, GitHub Actions, Docker, Netlify |
+A ideia não é emitir um veredicto automático de ilegalidade, mas sim fornecer uma trilha de evidência para apoio técnico, ambiental e operacional.
 
----
+## Stack tecnológica
 
-## ![folder logo](./assets/images/icons/folder-icon.png) 6. Project Structure
+- Python para processamento geoespacial e scripts de análise.
+- HTML, CSS e JavaScript para interface web interativa.
+- Leaflet para mapear camadas e interações no navegador.
+- Shapely, PyProj e PyShp para manipulação e geoprocessamento.
+- Estrutura de dados orientada a séries temporais e geometrias.
 
-```text
-├── assets/             # Renders, mockups and figures
-│   ├── images
-|   |      └── icons
-│   └── fonts
-├── data/               # Raw/cleaned data files or input text
-├── docs/               # Research write-ups, briefs, notes
-├── src/                # Implementation code, styles, notebooks
-└── README.md           # Project documentation
+## Como executar o MVP
+
+### 1) Preparar ambiente
+
+```bash
+python -m venv .venv
+source .venv/bin/activate   # Linux/macOS
+# ou
+.venv\Scripts\activate      # Windows
+pip install -r requirements.txt
 ```
 
----
+### 2) Servir a interface
 
-## ![book logo](./assets/images/icons/book-icon.png) 7. Reflection & Retrospective
+```bash
+python -m http.server 8000
+```
 
-This section turns a generic project into a compelling case study.
+Em seguida, abra no navegador:
 
-### What I Learnt
-* **Technical / Domain Knowledge:**
-  * Did you learn a new library, algorithm, statistical method, or design technique?
-  * *Example (Academic):* "Gained proficiency in adjusting for multi-class imbalance using focal loss rather than standard cross-entropy."
-  * *Example (Creative):* "Learned how to design variable font axes to dynamically adjust legibility based on container width."
-* **Process & Workflow:**
-  * What did you discover about your own planning, version control, or execution speed?
+```text
+http://localhost:8000/index.html
+```
 
-### What I Would Have Done Differently
-* **Architecture & Scoping:**
-  * Where did you spend too much time? Which premature design or technical decisions created bottlenecks?
-* **Alternative Approaches:**
-  * If starting fresh today, what tool, model, or layout strategy would you use instead?
-* **Future Iterations:**
-  * Mention clear, prioritized next steps (e.g., adding accessibility audits, testing on an external dataset, introducing responsive mobile breakpoints).
+### 3) Executar scripts de processamento
 
----
+Os módulos Python podem ser executados individualmente conforme a etapa da análise, como processamento de áreas, geração de mapas e integração de camadas geoespaciais.
 
-## ![project logo](./assets/images/icons/bookmark-icon.png) 9. Acknowledgements
-* Company & Company: For creating and supporting the Project educational program.
-* Challenge: Hands on Experience
-Team Collaborators: Recognition to all team members contributing to the project for collective effort on layout ideation, asset collection, and peer problem-solving.
+## Limitações e cuidados
 
-## Author
-[![LinkedIn](https://custom-icon-badges.demolab.com/badge/linkedin-0A66C2?logo=linkedin-white&logoColor=fff)](linkedin.com/in/lexkawa/)
+- O projeto é um MVP e ainda depende de validação em cenários reais de dados e piloto operacional.
+- Dados de satélite podem ser afetados por nuvens, resolução espacial, cobertura temporal e qualidade de aquisição.
+- A detecção por imagem não equivale automaticamente a evidência legal de infração.
+- O sistema deve ser usado como apoio técnico para investigação, com revisão humana e contextualização documental.
 
-[![GitHub Pages](https://img.shields.io/badge/github-%23121011.svg?logo=github&logoColor=white)](https://github.com/dev-corvus/)
+## Próximos passos
+
+- aprimorar a classificação de eventos por tipo e severidade;
+- incorporar mais fontes oficiais e dados temporais;
+- fortalecer a correlação entre área observada e autorizações ambientais;
+- criar alertas automatizados para áreas prioritárias;
+- evoluir para uma camada de validação e triagem com revisão humana.
+
+## Conclusão
+
+O Amazônia Sentinel representa uma proposta de produto orientada a vigilância ambiental e apoio à gestão territorial. O foco do MVP é demonstrar que é possível unir sensoriamento remoto, geoprocessamento e visualização em uma solução prática, rastreável e útil para a compreensão da degradação florestal na Amazônia.
